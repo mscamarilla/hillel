@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Challenge #1</title>
+
+</head>
+<body>
+    <div class="container" style="margin: 0 auto; width: 75%">
+        <h2>Итоги челленджа #1</h2>
+        <p>Было дано 2 задания на выбор, необязательно было выполнять 2.</p>
+        <p>Участвовали <b>Алексей Челышев</b> и <b>Влад Королев.</b></p>
+        <h3>Задание 1:</h3>
+        <p><i>Дано: текст "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+            commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
+
+            Задание: Найти все слова длиннее 6 символов, оставить в них первые 5, а вместо остального -  вывести звездочку. Например,
+            слово labore превратится в labor*. Вывести весь текст с замененными словами.
+        </i></p>
+        <h4>Решение Алексея Челышева:</h4>
+        <pre>
+            function counterCharacter (&$textArr){
+                $counter = 0;
+                $arrayLength  = strlen ($textArr) -1;
+
+                for($i = 0; $i <= $arrayLength; $i++){
+
+                    if($textArr[$i] != " " && $textArr[$i] != "." && $textArr[$i] != "," && $textArr[$i] != "!" && $textArr[$i] != "?"){
+                        $counter++;
+                        if($counter == 6){
+                            $textArr[$i] = "*";
+                        }
+                        if($counter > 6){
+                            $textArr[$i] = "";
+                        }
+                    }else {
+                        $counter = 0;
+                    }
+                }
+            }
+
+            counterCharacter($text);
+
+            echo $text;
+        </pre>
+        <b>Результат выполнения:</b>
+        <p>
+            Lorem ipsum dolor sit amet, conse* adipi* elit, sed do eiusm* tempo* incid* ut la* et dolor* magna aliqu*. Ut enim ad minim venia*, quis nostr* exerc* ullam* labor* nisi ut aliqu* ex ea co* conse*. Duis aute irure dolor in repre* in volup* velit esse cillu* dolor* eu fugia* nulla paria*. Exce* sint occae* cupid* non proid*, sunt in culpa qui offic* deser* molli* anim id est labor*
+        </p>
+        <b>Разбор полетов</b>
+        <p>Алексей работал со строкой, проверяя каждый символ в каждом слове.</p>
+        <p>Обратите внимание на 6 по счету * в слове 'la*'. Слово 'labore' обрезано не по правилам из-за того, что в присланном мне файле там был перенос строки. Функция не учитывает такой символ. В функции есть проверка на знаки "!" и "?", что для текста не требуется (их там нет), но не то, что бы это было ошибкой. (Кроме лишнего исполняемого кода, но ладно).</p>
+        <b>Еще один, внеконкурсный вариант исполнения:</b>
+        <pre>
+            $string_array = preg_split("/[\s]+/", $string);
+
+                foreach ($string_array as $value) {
+
+                    $special_characters = ['.', ','];
+
+                        if (strlen($value) > 5) {
+                            $cutted_value = substr_replace($value, '*', 5);
+                            $end_of_the_word = substr($value, -1);
+
+                            if (in_array($end_of_the_word, $special_characters)) {
+                                $cutted_value .= $end_of_the_word;
+
+                            }
+                        } else {
+                            $cutted_value = $value;
+                        }
+                    $string_array2[] = $cutted_value;
+
+                }
+
+            echo implode(' ', $string_array2);
+        </pre>
+        <b>Результат выполнения:</b>
+        <p>Lorem ipsum dolor sit amet, conse* adipi* elit, sed do eiusm* tempo* incid* ut labor* et dolor* magna aliqu*. Ut enim ad minim venia*, quis nostr* exerc* ullam* labor* nisi ut aliqu* ex ea commo* conse*. Duis aute irure dolor in repre* in volup* velit esse cillu* dolor* eu fugia* nulla paria*. Excep* sint occae* cupid* non proid*, sunt in culpa qui offic* deser* molli* anim id est labor*</p>
+        <b>Разбор полетов</b>
+        <p>Строка преобразуется в массив по принципу "все до пробела или любого варианта разрыва строки". В таком случае знаки '.' и ',' включены в слово.</p>
+        <p>В каждом элементе массива оставляем только 6 (5+0) символов и добавляем '.' и ',' если они там были. Если слово меньше 6 символов - ничего с ним не делаем. В итоге из массива снова делаем строку, добавляя те же самые пробелы.</p>
+        <h3>Задание 2:</h3>
+        <p><i>
+            Дано: массив $array = [9, 9, 9, 1, 1, 1, 2, 2, 7, 7, 2, 2, 15, 15, 4, 4, 4, 5, 5];
+            Задание: убрать дубли значений, чтоб получилось  $array = [9, 1, 2, 7, 15, 4, 5];
+            Можно использовать только один цикл foreach, т.е. единожды.
+            Запрещается использовать функции группировки элементов массива и запрещается нарушать порядок элементов.
+        </i></p>
+        <h4>Решение Влада Королева:</h4>
+        <pre>
+
+            $array = [9, 9, 9, 1, 1, 1, 2, 2, 7, 7, 2, 2, 15, 15, 4, 4, 4, 5, 5];
+
+            $result = array();
+            foreach ($array as $key => $value){
+                if(!in_array($value, $result))
+                    $result[$key]=$value;
+            }
+            print_r($result);
+        </pre>
+        <b>Результат выполнения:</b>
+        <p>Array ( [0] => 9 [3] => 1 [6] => 2 [8] => 7 [12] => 15 [14] => 4 [17] => 5 )</p>
+        <b>Разбор полетов</b>
+        <p>Придраться не к чему.</p>
+        <h4>Решение Алексея Челышева #1:</h4>
+        <pre>
+            $array = [9, 9, 9, 1, 1, 1, 2, 2, 7, 7, 2, 2, 15, 15, 4, 4, 4, 5, 5];
+
+            $arraySort = array_unique($array);
+
+            foreach ($arraySort as $item){
+                echo $item." ";
+            }
+        </pre>
+        <b>Результат выполнения:</b>
+        <p>9 1 2 7 15 4 5</p>
+        <h4>Решение Алексея Челышева #2:</h4>
+        <pre>
+            $numArray = [9, 9, 9, 1, 1, 1, 2, 2, 7, 7, 2, 2, 15, 15, 4, 4, 4, 5, 5];
+
+            $resultArray = array();
+            foreach ($numArray as $key => $value){
+                if(!in_array($value, $resultArray)) {
+                    $result[$key] = $value;
+                }
+            }
+            print_r($resultArray);
+        </pre>
+        <b>Результат выполнения:</b>
+        <p>Array ( )</p>
+        <b>Разбор полетов</b>
+        <p>#1 - возвращал строку, а не массив, плюс, была использована функция array_unique(), которую мы, посовещавшись, решили забраковать, как противоречащую условиям задачи</p>
+        <p>#2 - хех) опечаточка стоила пустого массива. Я приняла этот вариант, списав на спешку, и, подправив имена переменных, получился такой результат:</p>
+        <p>Array ( [0] => 9 [3] => 1 [6] => 2 [8] => 7 [12] => 15 [14] => 4 [17] => 5 )</p>
+        <b>Внеконкурсный вариант исполнения:</b>
+        <pre>
+            $array = [9, 9, 9, 1, 1, 1, 2, 2, 7, 7, 2, 2, 15, 15, 4, 4, 4, 5, 5];
+
+            foreach (array_count_values($array) as $key => $value) {
+                $new_array[] = $key;
+            }
+
+            print_r($new_array);
+        </pre>
+        <b>Результат выполнения:</b>
+        <p>Array ( [0] => 9 [1] => 1 [2] => 2 [3] => 7 [4] => 15 [5] => 4 [6] => 5 )</p>
+        <b>Разбор полетов</b>
+        <p>Функцию array_count_values() тоже решили не допустить по условиям задачи. Обратите внимание на возвращаемые ключи в этом варианте.</p>
+        <h3>Итог</h3>
+        <p>Считаю присуждение победы Владу справедливым. В понедельник с меня книжка.</p>
+        <p>Повторим?</p>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+    </div>
+</body>
+</html>

@@ -1,0 +1,19 @@
+.container {
+    width: 100%;
+}
+
+.row {
+    width: 49%;
+    display: inline-block;
+}
+
+.user {
+    border: 1px solid;
+    margin-bottom: 10px;
+}
+
+.left, .right {
+    display: inline-block;
+    vertical-align: top;
+    padding: 5px;
+}

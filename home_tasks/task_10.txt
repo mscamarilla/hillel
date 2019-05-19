@@ -1,0 +1,20 @@
+<?php
+
+//Написать запрос выбора количества заказов в таблице orders.
+SELECT COUNT(*) FROM orders
+
+//Написать запрос выбора ордеров цена которых больше 20 (amount)
+SELECT * FROM orders WHERE amount > 20
+
+//Написать запрос выбора всех данных пользователей и их ордеров. Пользователи без ордеров нас не интересуют.
+SELECT * FROM orders o INNER JOIN users u ON (o.user_id = u.id)
+
+//Написать запрос выбора id пользователей и количества его заказов.
+SELECT u.id, (count(o.id)) as total_orders FROM orders o INNER JOIN users u ON (o.user_id = u.id) GROUP BY u.id
+
+//Написать запрос выбора имейлов пользователей у которых нет заказов.
+SELECT u.email FROM orders o RIGHT JOIN users u ON (o.user_id = u.id) WHERE o.id IS NULL
+
+//*Написать запрос выбора пользователей которые заплатили за все свои заказы больше 50 (amount).
+//-задача "со звездочкой", как в школе?) прикольно)
+SELECT o.*, SUM(amount) AS total FROM orders o INNER JOIN users u ON (o.user_id = u.id) GROUP BY u.id HAVING total > 50
