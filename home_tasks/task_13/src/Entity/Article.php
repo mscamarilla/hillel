@@ -1,11 +1,21 @@
 <?php
+
 namespace Entity;
 
-use Entity\BaseEntity;
 
+/**
+ * Class Article
+ * @package Entity
+ */
 class Article extends BaseEntity
 {
+    /**
+     * @var
+     */
     private $title;
+    /**
+     * @var
+     */
     private $text;
 
     /**
@@ -20,21 +30,21 @@ class Article extends BaseEntity
     }
 
     /**
-     * @return mixed
+     * Get title
+     * @return string
      */
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->title;
     }
 
-
     /**
-     * @return mixed
+     * Get text
+     * @return string
      */
-    public function getText()
+    public function getText(): string
     {
         return $this->text;
     }
-
 
 }

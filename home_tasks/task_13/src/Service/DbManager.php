@@ -2,19 +2,25 @@
 
 namespace Service;
 
+/**
+ * Class DbManager
+ * @package Service
+ */
 class DbManager
 {
+    /**
+     * @var \MySQLi
+     */
     private $link;
 
     /**
-     * DB constructor.
+     * DbManager constructor.
      * @param string $hostname
      * @param string $username
      * @param string $password
      * @param string $database
      * @param string $port
      */
-
     public function __construct(string $hostname, string $username, string $password, string $database, string $port = '3306')
     {
         $this->link = new \MySQLi($hostname, $username, $password, $database, $port);
@@ -29,12 +35,11 @@ class DbManager
     }
 
     /**
-     * Making db query
+     * Query making
      * @param string $sql
-     * @return bool|stdClass
+     * @return object|null
      */
-
-    public function query(string $sql)
+    public function query(string $sql):?object
     {
         $query = $this->link->query($sql);
 
@@ -55,7 +60,7 @@ class DbManager
 
                 return $result;
             } else {
-                return true;
+                return null;
             }
         } else {
             trigger_error('Error: ' . $this->link->error . '<br />Error No: ' . $this->link->errno . '<br />' . $sql);
@@ -67,7 +72,7 @@ class DbManager
      * @param string $value
      * @return string
      */
-    public function escape(string $value)
+    public function escape(string $value):string
     {
         return $this->link->real_escape_string($value);
     }
