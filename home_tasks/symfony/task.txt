@@ -1,0 +1,26 @@
+Домашнее задание #16
+Symfony.
+1. Устанавливаем Symfony4.3  как делали на занятии 28
+https://symfony.com/doc/current/getting_started/index.html
+2. Генерируем сущность статьи:
+https://symfony.com/doc/current/doctrine.html
+3. Генерируем CRUD:
+https://symfony.com/doc/current/bundles/SensioGeneratorBundle/commands/generate_doctrine_crud.html
+
+
+Домашнее задание #17
+Symfony.
+1. Продолжаем работать с созданным проектом на symfony4.
+2. Добавляем сущность Category.
+3. Генерируем для нее CRUD.
+4. Устанавливаем связь Поста с Категорией как один ко многим(см. видео с занятия №30).
+https://symfony.com/doc/current/doctrine/associations.html#the-manytoone-onetomany-association
+5. Модифицируем FormType поста так, чтоб он показывал нам dropdown выбора категории.
+https://symfony.com/doc/current/reference/forms/types/entity.html
+6. Модифицируем index twig файл так чтоб он показывал имя категории поста в таблице.
+7. Написать фикстуры для категорий(5 записей) и постов(20 записей).
+8. * Написать сервис - кастомный валидатор, который будет наследовать ConstraintValidator и переопределять метод validate();
+Задача сервиса - проверять есть ли в title или text ругательства(англ). Если да - возвращать ошибку.
+https://symfonycasts.com/screencast/symfony-forms/custom-validator
+9. Пушим изменения в существующий репозиторий.
+

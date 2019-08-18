@@ -1,0 +1,12 @@
+Домашнее задание #15
+ООП. MVC. Аутентификация.
+1. Весь функционал из прошлого ДЗ реализовать с использованием шаблона MVC (задачей view компонента пока будет генерация json представления ответа).
+2. Модели юзера добавить свойство token.
+3. В базовом контроллере выполнять (аутентификацию):
+Сервер при каждом запросе будет ожидать заголовок с токеном и смотреть есть ли в базе юзер с таким токеном.
+4. Приложение должно уметь CRUD статьи по таким роутам:
+GET ?route=article/index - READ users articles
+POST ?route=article/create CREATE new article for user
+PUT  ?route=article/update UPDATE existing users article
+DELETE ?route=article/delete DELETE existing users article
+5. Не забывать type hints, phpdoc, комментарии на английском, сообщения коммитов на английском.
